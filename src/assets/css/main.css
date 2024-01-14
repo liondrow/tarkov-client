@@ -1,0 +1,70 @@
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    font-family: 'Bender', sans-serif;
+}
+input {
+    font-family: 'Bender', sans-serif;
+}
+#app {
+    height: 100%;
+}
+h1 {
+    font-size:2rem;
+    padding:10px 0;
+}
+.tarkov-dark-btn {
+    text-align: center;
+    word-break: break-word;
+    background-color: #9a8866;
+    border: none;
+    border-radius: 3px;
+    color: #000000;
+    font-size: 17pt;
+    padding: 11px 24px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 0.5s ease;
+}
+
+:not(.btn-check)+.tarkov-dark-btn:active,
+.tarkov-dark-btn:focus,
+.tarkov-dark-btn:active,
+.tarkov-dark-btn:hover {
+    color: #000000;
+    background-color: #9a8866;
+    outline:none;
+    opacity: 1 !important;
+}
+
+input[type="text"], input[type="password"], textarea {
+    background : rgba(255, 255, 255, 0.54);
+}
+
+.error-text {
+    color: #b12121eb;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.preloader {
+    z-index: 9999;
+}
+
+.preloader-full {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.66);
+    height: 100%;
+}
