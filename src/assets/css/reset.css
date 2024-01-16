@@ -87,3 +87,7 @@ label {
 legend {
     display: block;
 }
+a {
+    text-decoration: none;
+    color:inherit;
+}

@@ -5,9 +5,9 @@
     </div>
     <div class="container login-wrapper">
       <h1>Авторизация</h1>
-      <form autocomplete="off" @submit.prevent="handleLogin">
+      <form autocomplete="off">
         <div class="mb-3">
-          <label for="idInput" class="form-label">ID</label>
+          <label for="idInput" class="form-label">TeamID</label>
           <input type="text" class="form-control" id="idInput" v-model="user.username" required>
         </div>
         <div class="mb-3">
@@ -50,6 +50,7 @@
         if (this.user.username && this.user.password) {
           this.$store.dispatch('auth/login', this.user).then(
               () => {
+                window.location.reload()
                 this.$router.push('/main');
               },
               error => {
@@ -71,12 +72,6 @@
     position: relative;
     height: 100%;
     overflow: hidden;
-    background-image: url("../assets/images/bg-mob.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0.73);
-    background-blend-mode: multiply;
     color: rgba(255, 255, 255, 0.73);
     text-align: center;
   }

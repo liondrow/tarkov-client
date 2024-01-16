@@ -4,6 +4,12 @@ html {
 body {
     height: 100%;
     font-family: 'Bender', sans-serif;
+    background-image: url("../images/bg-mob.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.73);
+    background-blend-mode: multiply;
 }
 input {
     font-family: 'Bender', sans-serif;
@@ -43,7 +49,7 @@ h1 {
     opacity: 1 !important;
 }
 
-input[type="text"], input[type="password"], textarea {
+input[type="text"], input[type="number"], input[type="password"], textarea {
     background : rgba(255, 255, 255, 0.54);
 }
 
@@ -52,9 +58,19 @@ input[type="text"], input[type="password"], textarea {
     font-size: 1.2rem;
     font-weight: bold;
 }
+.success-text {
+    color: rgba(46, 100, 62, 0.92);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
 
 .preloader {
     z-index: 9999;
+}
+.back-btn {
+    font-size: 1.5rem;
+    text-align: left;
+    padding-left: 1rem;
 }
 
 .preloader-full {
@@ -67,4 +83,9 @@ input[type="text"], input[type="password"], textarea {
     min-height: 100vh;
     background: rgba(0, 0, 0, 0.66);
     height: 100%;
+}
+.wallet-wrapper {
+    font-size:2rem;
+    text-align: right;
+    padding-right: 2rem;
 }

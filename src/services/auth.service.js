@@ -1,4 +1,4 @@
-import {API} from './api.js';
+import API from './api.js';
 
 const LOGIN_URL = 'login_check';
 
@@ -11,7 +11,7 @@ class AuthService {
             })
             .then(response => {
                 if (response.data.token) {
-                    localStorage.setItem('token', JSON.stringify(response.data));
+                    localStorage.setItem('token', JSON.stringify(response.data.token));
                 }
                 return response.data;
             });
