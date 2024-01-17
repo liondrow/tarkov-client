@@ -12,7 +12,7 @@
       </div>
       <ul class="col p-0 nav-list">
         <li>
-          <router-link to="profile">
+          <router-link to="quests">
             Квесты
           </router-link>
         </li>

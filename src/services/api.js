@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "@/router/index.js";
 
 const baseUrl = import.meta.env.VITE_BASE_API
 const token = JSON.parse(localStorage.getItem('token'))
@@ -6,7 +7,6 @@ const API = axios.create({
     baseURL: baseUrl,
     headers: {
         "Content-Type": "application/json",
-        "Authorization": 'Bearer ' + token
     }
 })
 API.interceptors.request.use(
@@ -21,19 +21,21 @@ API.interceptors.request.use(
     }
 );
 API.interceptors.response.use(
-    (res) => {
-        return res;
+    response => {
+        return response;
     },
-    async(err) => {
-        const originalConfig = err.config;
-        console.log(originalConfig)
-        if (originalConfig.url !== "/login_check" && err.response) {
-            if (err.response.status === 401) {
+    error => {
+        if(error.response) {
+            switch(error.response.status) {
+                case 401:
                 localStorage.removeItem('token');
+                router.replace({
+                    path:'/login'
+                })
             }
+            return Promise.reject(error.response.data);
         }
-        return Promise.reject(err)
     }
-)
 
+)
 export default API;

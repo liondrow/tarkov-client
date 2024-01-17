@@ -3,6 +3,8 @@ import LoginView from "@/views/LoginView.vue";
 import MainView from "@/views/MainView.vue";
 import WalletView from "@/views/WalletView.vue";
 import InvoiceHistoryView from "@/views/InvoiceHistoryView.vue";
+import QuestView from "@/views/QuestView.vue";
+import FinishedQuestView from "@/views/FinishedQuestView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +28,16 @@ const router = createRouter({
       path: '/history',
       name: 'history',
       component: InvoiceHistoryView
+    },
+    {
+      path: '/quests',
+      name: 'quests',
+      component: QuestView
+    },
+    {
+      path: '/finished_quests',
+      name: 'finished_quests',
+      component: FinishedQuestView
     },
   ]
 })
