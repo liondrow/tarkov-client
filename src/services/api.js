@@ -1,5 +1,6 @@
 import axios from "axios";
 import router from "@/router/index.js";
+import Swal from "sweetalert2";
 
 const baseUrl = import.meta.env.VITE_BASE_API
 const token = JSON.parse(localStorage.getItem('token'))
@@ -26,8 +27,7 @@ API.interceptors.response.use(
     },
     error => {
         if(error.response) {
-            switch(error.response.status) {
-                case 401:
+            if(error.response.status === 401) {
                 localStorage.removeItem('token');
                 router.replace({
                     path:'/login'

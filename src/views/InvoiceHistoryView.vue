@@ -84,7 +84,7 @@ export default {
     padding:5px;
     background: rgba(0, 0, 0, 0.33);
     max-height: 70vh;
-    overflow: scroll;
+    overflow-y: auto;
     border-radius: 15px;
   }
   .history-table-header {

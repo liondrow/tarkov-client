@@ -22,12 +22,12 @@
           </router-link>
         </li>
        <li>
-         <router-link to="profile">
+         <router-link to="market">
            Барахолка
          </router-link>
        </li>
         <li>
-          <router-link to="profile">
+          <router-link to="shelter">
             Убежище
           </router-link>
         </li>
@@ -50,13 +50,13 @@ export default {
       loading: false
     };
   },
-  mounted() {
+  async mounted() {
     this.loading = true;
-    API.get('wallet')
+    await API.get('wallet')
         .then((response) => {
           this.wallet = response.data
-          this.loading = false
         })
+    this.loading = false
   },
   methods: {
     logout() {

@@ -132,6 +132,6 @@ export default {
     background: rgba(0, 0, 0, 0.33);
     border-radius: 15px;
     max-height: 60%;
-    overflow: scroll;
+    overflow-y: auto;
   }
 </style>

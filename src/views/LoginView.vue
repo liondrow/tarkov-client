@@ -41,7 +41,7 @@
     },
     created() {
       if (this.loggedIn) {
-        this.$router.push('/main');
+        this.$router.push('/');
       }
     },
     methods: {
@@ -51,7 +51,7 @@
           this.$store.dispatch('auth/login', this.user).then(
               () => {
                 window.location.reload()
-                this.$router.push('/main');
+                this.$router.push('/');
               },
               error => {
                 this.loading = false;

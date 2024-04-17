@@ -22,7 +22,6 @@ export const auth = {
             );
         },
         logout({ commit }) {
-            console.log('zalupa');
             AuthService.logout();
             commit('logout');
         }
