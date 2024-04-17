@@ -12,7 +12,7 @@
           </router-link>
         </div>
       </div>
-      <h1 class="text-center">Квесты <i class="fa-solid fa-arrows-rotate" @click="getMarketLots"></i></h1>
+      <h1 class="text-center">Квесты <i class="fa-solid fa-arrows-rotate" @click="getQuests"></i></h1>
       <div class="quest-list mt-3">
         <div class="accordion" id="accordionQuests" v-if="questsCount > 0">
           <div class="accordion-item" v-for="(quest, idx) in quests">
