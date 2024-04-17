@@ -78,6 +78,7 @@ export default {
           .then((response) => {
             this.quests = response.data
             this.questsCount = Object.keys(response.data).length
+            this.loading = false
           })
     }
   },
