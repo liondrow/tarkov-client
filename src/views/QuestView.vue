@@ -12,7 +12,7 @@
           </router-link>
         </div>
       </div>
-      <h1 class="text-center">Квесты</h1>
+      <h1 class="text-center">Квесты <i class="fa-solid fa-arrows-rotate" @click="getMarketLots"></i></h1>
       <div class="quest-list mt-3">
         <div class="accordion" id="accordionQuests" v-if="questsCount > 0">
           <div class="accordion-item" v-for="(quest, idx) in quests">
@@ -71,13 +71,18 @@ export default {
       return this.questsCount;
     }
   },
+  methods: {
+    async getQuests() {
+      this.loading = true;
+      await API.get('quests')
+          .then((response) => {
+            this.quests = response.data
+            this.questsCount = Object.keys(response.data).length
+          })
+    }
+  },
   async mounted() {
-    this.loading = true;
-    await API.get('quests')
-        .then((response) => {
-          this.quests = response.data
-          this.questsCount = Object.keys(response.data).length
-        })
+    await this.getQuests()
     await API.get('wallet')
         .then((response) => {
           this.wallet = response.data
