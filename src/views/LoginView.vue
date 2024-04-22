@@ -57,7 +57,7 @@
           await this.$store.dispatch('auth/login', this.user).then(
               async () => {
                 await this.$router.push('/');
-                //window.location.reload()
+                window.location.reload()
               },
               error => {
                 this.loading = false;

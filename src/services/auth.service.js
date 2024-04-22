@@ -9,9 +9,9 @@ class AuthService {
                 username: user.username,
                 password: user.password
             })
-            .then(response => {
+            .then(async response => {
                 if (response.data.token) {
-                    localStorage.setItem('token', JSON.stringify(response.data.token));
+                    await localStorage.setItem('token', JSON.stringify(response.data.token));
                 }
                 return response.data;
             });

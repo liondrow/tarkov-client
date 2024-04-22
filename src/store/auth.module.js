@@ -11,8 +11,8 @@ export const auth = {
     actions: {
         login({ commit }, token) {
             return AuthService.login(token).then(
-                token => {
-                    commit('loginSuccess', token);
+                async token => {
+                    await commit('loginSuccess', token);
                     return Promise.resolve(token);
                 },
                 error => {
@@ -27,9 +27,9 @@ export const auth = {
         }
     },
     mutations: {
-        loginSuccess(state, token) {
-            state.status.loggedIn = true;
-            state.token = token;
+        async loginSuccess(state, token) {
+            await state.token = token;
+            await state.status.loggedIn = true;
         },
         loginFailure(state) {
             state.status.loggedIn = false;
