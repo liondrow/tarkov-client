@@ -52,11 +52,15 @@ export default {
   },
   async mounted() {
     this.loading = true;
-    await API.get('wallet')
-        .then((response) => {
-          this.wallet = response.data
-        })
-    this.loading = false
+    await this.$nextTick(function () {
+      API.get('wallet')
+          .then((response) => {
+            this.wallet = response.data
+          })
+      this.loading = false
+    })
+
+
   },
   methods: {
     logout() {
