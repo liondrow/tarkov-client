@@ -27,9 +27,9 @@ export const auth = {
         }
     },
     mutations: {
-        async loginSuccess(state, token) {
-            await state.token = token;
-            await state.status.loggedIn = true;
+        loginSuccess(state, token) {
+            state.token = token;
+            state.status.loggedIn = true;
         },
         loginFailure(state) {
             state.status.loggedIn = false;
