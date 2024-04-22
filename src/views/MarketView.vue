@@ -52,7 +52,6 @@
 <script>
 import API from "@/services/api.js";
 import BackBtn from "@/components/BackBtn.vue";
-import Swal from 'sweetalert2'
 
 export default {
   name: "Market",
@@ -68,20 +67,25 @@ export default {
   },
   methods: {
     async confirmToBuy(id) {
-      Swal.fire({
-        title: "Купить лот?",
-        text: "Средства будут списаны с вашего счета",
-        icon: "info",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Да",
-        cancelButtonText: "Нет"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.handleBuyLot(id)
-        }
-      });
+      this.$confirm(
+          {
+            title: 'Купить лот?',
+            message: 'Средства будут списаны с вашего счета',
+            button: {
+              yes: 'Подтвердить',
+              no: 'Отмена'
+            },
+            /**
+             * Callback Function
+             * @param {Boolean} confirm
+             */
+            callback: confirm => {
+              if (confirm) {
+                this.handleBuyLot(id)
+              }
+            }
+          }
+      )
     },
     async handleBuyLot(id) {
       await API.post('market_buy', {lotId: id})
@@ -89,17 +93,29 @@ export default {
                 if (response.data.status && response.data.buyerWalletValue) {
                   this.wallet = response.data.buyerWalletValue;
                   this.getMarketLots();
+                  this.$confirm(
+                      {
+                        title: 'Успешно!',
+                        message: 'Пройдите к Барахольщику за выкупленным лотом',
+                        button: {
+                          no: 'ОК',
+                        }
+                      }
+                  )
                 }
                 this.loading = false;
               },
               error => {
                 this.loading = false;
-                Swal.fire({
-                  title: "Ошибка!",
-                  text: error.message,
-                  icon: 'error',
-                  confirmButtonColor: "#9a8866"
-                })
+                this.$confirm(
+                    {
+                      title: 'Ошибка!',
+                      message: error.detail,
+                      button: {
+                        no: 'ОК',
+                      }
+                    }
+                )
               });
     },
     async getMarketLots() {

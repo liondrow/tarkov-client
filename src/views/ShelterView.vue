@@ -54,7 +54,6 @@
 <script>
 import API from "@/services/api.js";
 import BackBtn from "@/components/BackBtn.vue";
-import Swal from 'sweetalert2'
 
 export default {
   name: "Shelter",

@@ -13,7 +13,7 @@
       </div>
       <div class="wallet-form-wrapper">
         <h1 class="text-center">Отправить перевод</h1>
-        <form id="walletForm" @submit.prevent="sendInvoice">
+        <form id="walletForm" @submit.prevent="confirmToBuy">
           <div class="mb-3">
             <label for="teamTo" class="form-label">TeamID получателя</label>
             <input type="text" class="form-control" id="teamTo" v-model="walletInvoice.teamTo">
@@ -24,12 +24,12 @@
           </div>
           <button type="submit" class="btn tarkov-dark-btn" :disabled="loading">Отправить</button>
         </form>
-        <div class="error-text text-center" v-if="message">
+<!--        <div class="error-text text-center" v-if="message">
           {{message}}
-        </div>
-        <div class="success-text text-center" v-if="successMessage">
+        </div>-->
+<!--        <div class="success-text text-center" v-if="successMessage">
           {{successMessage}}
-        </div>
+        </div>-->
       </div>
       <div class="history-btn-wrapper text-center my-4 text-decoration-underline">
         <router-link to="history">
@@ -91,12 +91,41 @@ export default {
     clearInterval(this.polling)
   },
   methods: {
-    sendInvoice() {
+    async confirmToBuy() {
+      this.$confirm(
+          {
+            title: 'Отправить перевод?',
+            message: 'Средства будут списаны с вашего счета',
+            button: {
+              yes: 'Подтвердить',
+              no: 'Отмена'
+            },
+            /**
+             * Callback Function
+             * @param {Boolean} confirm
+             */
+            callback: confirm => {
+              if (confirm) {
+                this.sendInvoice()
+              }
+            }
+          }
+      )
+    },
+    async sendInvoice() {
       this.message = '';
       this.successMessage = '';
       this.loading = true;
       if (this.walletInvoice.teamTo === this.teamUid) {
-        this.message = "Нельзя отправлять перводы самому себе"
+        this.$confirm(
+            {
+              title: 'Ошибка!',
+              message: "Нельзя отправлять перводы самому себе",
+              button: {
+                no: 'ОК',
+              }
+            }
+        )
         this.loading = false
         return
       }
@@ -105,13 +134,29 @@ export default {
               this.wallet = response.data.newWalletValue
               this.walletInvoice.sum = 0
               this.walletInvoice.teamTo = ''
-              this.successMessage = 'Перевод успешно отправлен!'
+              this.$confirm(
+              {
+                title: 'Успешно!',
+                message: 'Перевод успешно отправлен!',
+                button: {
+                  no: 'ОК',
+                }
+              })
               this.loading = false;
             }).catch((error) => {
           this.message =
               (error.response && error.response.data.detail) ||
-              error.message ||
+              error.detail ||
               error.toString();
+          this.$confirm(
+              {
+                title: 'Ошибка!',
+                message: this.message,
+                button: {
+                  no: 'ОК',
+                }
+              }
+          )
           this.loading = false;
         })
       } else {
