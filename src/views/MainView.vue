@@ -51,14 +51,14 @@ export default {
     };
   },
   async mounted() {
-    this.loading = true;
+    /*this.loading = true;
     await this.$nextTick(function () {
       API.get('wallet')
           .then((response) => {
             this.wallet = response.data
           })
       this.loading = false
-    })
+    })*/
 
 
   },
