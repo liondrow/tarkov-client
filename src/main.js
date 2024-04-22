@@ -2,8 +2,8 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
 import './assets/css/reset.css'
 import './assets/css/sweetalert.min.css'
-import './assets/css/main.css'
 import 'vue3-confirm-dialog/style'
+import './assets/css/main.css'
 
 
 import {createApp} from 'vue'
