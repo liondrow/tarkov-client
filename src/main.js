@@ -11,6 +11,9 @@ import App from './App.vue'
 import router from './router'
 import store from "@/store/store.js"
 import Vue3ConfirmDialog from 'vue3-confirm-dialog';
+import setupInterceptors from '@/services/interceptors.js';
+
+setupInterceptors(store);
 
 const app = createApp(App)
 
