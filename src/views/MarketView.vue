@@ -100,7 +100,7 @@ export default {
                   icon: 'error',
                   confirmButtonColor: "#9a8866"
                 })
-              })
+              });
     },
     async getMarketLots() {
       this.loading = true;
