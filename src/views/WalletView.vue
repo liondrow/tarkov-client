@@ -145,7 +145,7 @@ export default {
               this.loading = false;
             }).catch((error) => {
           this.message =
-              (error.response && error.response.data.detail) ||
+              (error.response && error.response.data.detail) || error.message ||
               error.detail ||
               error.toString();
           this.$confirm(
