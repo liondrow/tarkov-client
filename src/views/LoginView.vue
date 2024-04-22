@@ -25,6 +25,7 @@
 
 <script>
   import User from '../models/userLogin.js';
+  import {onMounted} from "vue";
   export default {
     name: 'Login',
     data() {
@@ -33,6 +34,11 @@
         loading: false,
         message: ''
       };
+    },
+    setup() {
+      onMounted(() => {
+        localStorage.clear();
+      })
     },
     computed: {
       loggedIn() {
@@ -45,13 +51,13 @@
       }
     },
     methods: {
-      handleLogin() {
+      async handleLogin() {
         this.loading = true;
         if (this.user.username && this.user.password) {
-          this.$store.dispatch('auth/login', this.user).then(
-              () => {
+          await this.$store.dispatch('auth/login', this.user).then(
+              async () => {
+                await this.$router.push('/');
                 window.location.reload()
-                this.$router.push('/');
               },
               error => {
                 this.loading = false;
