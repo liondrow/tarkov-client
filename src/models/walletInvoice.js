@@ -1,6 +1,6 @@
 export default class WalletInvoice {
-    constructor(teamTo, sum) {
-        this.teamTo = teamTo;
+    constructor(userTo, sum) {
+        this.userTo = userTo;
         this.sum = sum;
     }
 }

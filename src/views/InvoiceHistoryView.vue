@@ -22,7 +22,7 @@
           </li>
           <li v-for="historyInvoice in historyInvoices">
             <div class="row history-row py-2" v-bind:class="{ 'incoming-invoice': historyInvoice.type === 'INCOMING', 'outgoing-invoice': historyInvoice.type === 'OUTGOING' }">
-              <div class="col-8"><span class="small" style="font-size:0.9rem;">{{historyInvoice.teamId}}.</span> {{historyInvoice.team}}</div>
+              <div class="col-8"><span class="small" style="font-size:0.9rem;">{{historyInvoice.userId}}.</span> {{historyInvoice.user}}</div>
               <div class="col-4 text-end">{{ (historyInvoice.type === 'INCOMING') ? "+" : "-" }} {{historyInvoice.sum}} </div>
             </div>
           </li>

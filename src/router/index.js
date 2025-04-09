@@ -7,6 +7,7 @@ import QuestView from "@/views/QuestView.vue";
 import FinishedQuestView from "@/views/FinishedQuestView.vue";
 import MarketView from "@/views/MarketView.vue";
 import ShelterView from "@/views/ShelterView.vue";
+import PriceView from "@/views/PriceView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,6 +26,11 @@ const router = createRouter({
       path: '/wallet',
       name: 'wallet',
       component: WalletView
+    },
+    {
+      path: '/price',
+      name: 'price',
+      component: PriceView
     },
     {
       path: '/history',

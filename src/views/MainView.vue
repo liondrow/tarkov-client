@@ -27,6 +27,11 @@
          </router-link>
        </li>
         <li>
+          <router-link to="price">
+            Прайс
+          </router-link>
+        </li>
+        <li>
           <router-link to="shelter">
             Убежище
           </router-link>

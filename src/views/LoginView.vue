@@ -7,7 +7,7 @@
       <h1>Авторизация</h1>
       <form autocomplete="off">
         <div class="mb-3">
-          <label for="idInput" class="form-label">TeamID</label>
+          <label for="idInput" class="form-label">UserID</label>
           <input type="text" class="form-control" id="idInput" v-model="user.username" required>
         </div>
         <div class="mb-3">

@@ -6,7 +6,7 @@
     <div class="container">
       <back-btn />
       <div class="myUid text-center mt-5">
-        <h1>TeamId: <span class="bold-value">{{ teamUid }}</span></h1>
+        <h1>UserId: <span class="bold-value">{{ userUid }}</span></h1>
       </div>
       <div class="wallet-value text-center mb-5 mt-3">
         Баланс: <span class="bold-value">{{ wallet }}</span> <i class="fa-solid fa-ruble-sign"></i>
@@ -15,21 +15,21 @@
         <h1 class="text-center">Отправить перевод</h1>
         <form id="walletForm" @submit.prevent="confirmToBuy">
           <div class="mb-3">
-            <label for="teamTo" class="form-label">TeamID получателя</label>
-            <input type="text" class="form-control" id="teamTo" v-model="walletInvoice.teamTo">
+            <label for="userTo" class="form-label">UserID получателя</label>
+            <input type="text" class="form-control" id="userTo" v-model="walletInvoice.userTo">
           </div>
           <div class="mb-3">
             <label for="sum" class="form-label">Сумма</label>
-            <input type="number" class="form-control" id="sum" v-model="walletInvoice.sum">
+            <input
+                type="number"
+                class="form-control"
+                id="sum"
+                :value="walletInvoice.sum === 0 ? '' : walletInvoice.sum"
+                @input="e => walletInvoice.sum = e.target.value === '' ? 0 : Number(e.target.value)"
+            />
           </div>
           <button type="submit" class="btn tarkov-dark-btn" :disabled="loading">Отправить</button>
         </form>
-<!--        <div class="error-text text-center" v-if="message">
-          {{message}}
-        </div>-->
-<!--        <div class="success-text text-center" v-if="successMessage">
-          {{successMessage}}
-        </div>-->
       </div>
       <div class="history-btn-wrapper text-center my-4 text-decoration-underline">
         <router-link to="history">
@@ -51,11 +51,11 @@ export default {
   data() {
     return {
       wallet: 0,
-      teamUid: '',
+      userUid: '',
       message: '',
       polling: null,
       successMessage: '',
-      availableTeams: [],
+      availableUsers: [],
       loading: false,
       walletInvoice: new WalletInvoice('', 0)
     };
@@ -64,12 +64,12 @@ export default {
     this.loading = true;
     API.get('user-data')
         .then((response) => {
-          this.teamUid = response.data.uid
+          this.userUid = response.data.uid
           this.loading = false
         });
-    API.get('wallet_available_teams')
+    API.get('wallet_available_users')
         .then((response) => {
-          this.availableTeams = response.data
+          this.availableUsers = response.data
           this.loading = false
         });
     this.polling = setInterval(() => {
@@ -116,7 +116,7 @@ export default {
       this.message = '';
       this.successMessage = '';
       this.loading = true;
-      if (this.walletInvoice.teamTo === this.teamUid) {
+      if (this.walletInvoice.userTo === this.userUid) {
         this.$confirm(
             {
               title: 'Ошибка!',
@@ -129,11 +129,11 @@ export default {
         this.loading = false
         return
       }
-      if (this.walletInvoice.teamTo || this.walletInvoice.sum) {
+      if (this.walletInvoice.userTo || this.walletInvoice.sum) {
         API.post('wallet_invoice', this.walletInvoice).then((response) => {
               this.wallet = response.data.newWalletValue
               this.walletInvoice.sum = 0
-              this.walletInvoice.teamTo = ''
+              this.walletInvoice.userTo = ''
               this.$confirm(
               {
                 title: 'Успешно!',
