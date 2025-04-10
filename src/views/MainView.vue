@@ -27,6 +27,11 @@
          </router-link>
        </li>
         <li>
+          <router-link to="map">
+            Карта
+          </router-link>
+        </li>
+        <li>
           <router-link to="price">
             Прайс
           </router-link>
