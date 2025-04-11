@@ -9,14 +9,12 @@ export default defineConfig({
     vue(),
     vueJsx(),
   ],
+  preview: {
+    allowedHosts: ['tarkov-anubis.ru']
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  },
-  server: {
-    preview: {
-      allowedHosts: ['tarkov-anubis.ru'],
-    },
-  },
+  }
 })
