@@ -14,5 +14,10 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  server: {
+    preview: {
+      allowedHosts: ['tarkov-anubis.ru'],
+    },
+  },
 })
