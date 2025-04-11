@@ -36,8 +36,8 @@
                 </div>
                 <div class="row mb-2">
                   <div class="col-3">Активность:</div>
-                  <div class="col-9 fw-bold" v-if="shelter.status">Да</div>
-                  <div class="col-9 fw-bold" v-if="!shelter.status">Нет</div>
+                  <div class="col-9 fw-bold" v-if="shelter.status" style="color:#25a325;">Да</div>
+                  <div class="col-9 fw-bold" v-if="!shelter.status" style="color:#e13030;">Нет</div>
                 </div>
 
               </div>

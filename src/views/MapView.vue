@@ -12,8 +12,8 @@
           </router-link>
         </div>
       </div>
-      <div class="d-flex align-items-start justify-content-center quest-wrapper market-wrapper col-12" style="min-height: 700px">
-        <div id="map" style="width:100%; height: 100%; min-height: 700px; overflow: hidden;padding: 20px 0;"></div>
+      <div class="d-flex align-items-start justify-content-center quest-wrapper market-wrapper col-12" style="min-height: 600px">
+        <div id="map" style="width:100%; height: 100%; min-height: 600px; overflow: hidden;padding: 20px 0;"></div>
       </div>
 
     </div>
@@ -54,6 +54,10 @@ export default {
         });
   },
   methods: {
+    convertClipStringToArray(clipString) {
+      const values = clipString.split(',').map(item => parseInt(item.trim(), 10));
+      return [[values[0], values[1]], [values[2], values[3]]];
+    },
     loadYandexMap() {
       const loadScript = (src) => {
         return new Promise((resolve) => {
@@ -116,37 +120,47 @@ export default {
 
         const pointCollection = new ymaps.GeoObjectCollection();
 
-        const createPlacemark = (coord_1, coord_2, markerImage, clip, addr) => {
-          const placemarkOptions = clip
-              ? {
-                iconLayout: 'default#image',
-                iconImageHref: markerImage,
-                iconImageSize: [35, 44],
-                iconImageOffset: [-15, -50],
-                iconImageClipRect: clip
+        const createPlacemark = function(markerId, coord_1, coord_2, markerImage, clip, addr) {
+          if(markerId != null && clip != null) {
+            console.log(markerId, markerImage, clip)
+            markerId = new ymaps.GeoObject({
+              geometry: {
+                type: "Point",
+                coordinates: [+coord_1, +coord_2]
+              },
+              properties: {
+                hintContent: name,
+                balloonContent: addr
               }
-              : {
-                preset: 'islands#blackStretchyIcon'
-              };
-
-          const placemark = new ymaps.GeoObject({
-            geometry: {
-              type: 'Point',
-              coordinates: [+coord_1, +coord_2]
-            },
-            properties: {
-              hintContent: addr,
-              balloonContent: addr
-            }
-          }, placemarkOptions);
-
-          pointCollection.add(placemark);
-        };
+            }, {
+              iconLayout: 'default#image',
+              iconImageHref: markerImage,
+              iconImageSize: [35, 44],
+              iconImageOffset: [-15, -50],
+              iconImageClipRect: clip
+            });
+            pointCollection.add(markerId);
+          } else {
+            markerId = new ymaps.GeoObject({
+              geometry: {
+                type: "Point",
+                coordinates: [+coord_1, +coord_2]
+              },
+              properties: {
+                hintContent: name,
+                balloonContent: addr
+              }
+            }, {
+              preset: 'islands#blackStretchyIcon'
+            });
+            pointCollection.add(markerId);
+          }
+        }
 
         // Добавляем точки
         Object.values(this.points).forEach((point) => {
-          const clip = point.clipRect ? point.clipRect : null;
-          createPlacemark(point.latitude, point.longitude, '/assets/images/points.png', clip, point.name);
+          const clip = point.clipRect ? this.convertClipStringToArray(point.clipRect) : null;
+          createPlacemark(point.id, point.latitude, point.longitude, '/assets/images/points.png', clip, point.name);
         });
 
         myMap.geoObjects.add(pointCollection);
