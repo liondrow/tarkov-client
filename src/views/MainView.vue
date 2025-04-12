@@ -33,7 +33,7 @@
         </li>
         <li>
           <router-link to="price">
-            Прайс
+            Цены
           </router-link>
         </li>
         <li>
