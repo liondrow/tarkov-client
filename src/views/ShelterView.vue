@@ -27,15 +27,15 @@
                  data-bs-parent="#accordionQuests">
               <div class="accordion-body">
                 <div class="row mb-2">
-                  <div class="col-3">Описание:</div>
-                  <div class="col-9 fw-bold" v-html="shelter.description"></div>
+                  <div class="col-3 fw-bold">Описание:</div>
+                  <div class="col-9" v-html="shelter.description"></div>
                 </div>
                 <div class="row mb-2">
-                  <div class="col-3">Бонус:</div>
-                  <div class="col-9 fw-bold" v-html="shelter.bonus"></div>
+                  <div class="col-3 fw-bold">Бонус:</div>
+                  <div class="col-9" v-html="shelter.bonus"></div>
                 </div>
                 <div class="row mb-2">
-                  <div class="col-3">Активность:</div>
+                  <div class="col-3 fw-bold">Активность:</div>
                   <div class="col-9 fw-bold" v-if="shelter.status" style="color:#25a325;">Да</div>
                   <div class="col-9 fw-bold" v-if="!shelter.status" style="color:#e13030;">Нет</div>
                 </div>
@@ -142,5 +142,13 @@ export default {
   border-radius: 15px;
   max-height: 60%;
   overflow-y: auto;
+}
+
+@media (max-width: 380px) {
+  .accordion-body .row > div {
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 </style>

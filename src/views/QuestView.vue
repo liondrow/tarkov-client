@@ -134,4 +134,13 @@ export default {
     max-height: 60%;
     overflow-y: auto;
   }
+
+  @media (max-width: 380px) {
+    .accordion-body .row > div {
+      width: 100%;
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+
 </style>

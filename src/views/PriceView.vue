@@ -35,9 +35,9 @@
                   <tbody>
                   <tr v-for="(item) in priceEl.items">
                     <td>{{ item.name }}</td>
-                    <td>{{ item.praporPrice }}</td>
-                    <td>{{ item.terapevtPrice }}</td>
-                    <td>{{ item.baraholshikPrice }}</td>
+                    <td data-label="Прапор">{{ item.praporPrice }}</td>
+                    <td data-label="Терапевт">{{ item.terapevtPrice }}</td>
+                    <td data-label="Барахольщик">{{ item.baraholshikPrice }}</td>
                   </tr>
                   </tbody>
                 </table>
@@ -135,5 +135,38 @@ export default {
     border-radius: 15px;
     max-height: 60%;
     overflow-y: auto;
+  }
+  @media (max-width: 380px) {
+    .accordion-body table,
+    .accordion-body thead,
+    .accordion-body tbody,
+    .accordion-body th,
+    .accordion-body td,
+    .accordion-body tr {
+      display: block;
+      width: 100%;
+    }
+
+    .accordion-body thead tr {
+      display: none; /* Скрываем заголовки, они будут в контенте ячеек */
+    }
+
+    .accordion-body td {
+      position: relative;
+      padding-left: 50%;
+      text-align: left;
+      border: none;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .accordion-body td::before {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      white-space: nowrap;
+      font-weight: bold;
+      content: attr(data-label);
+    }
   }
 </style>
