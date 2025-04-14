@@ -23,4 +23,5 @@ jobs:
             cd /var/www/tarkov-front
             git pull origin master
             npm install
+            npm run build
             pm2 restart tarkov
