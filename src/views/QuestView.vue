@@ -17,11 +17,11 @@
         <div class="accordion" id="accordionQuests" v-if="questsCount > 0">
           <div class="accordion-item" v-for="(quest, idx) in quests">
             <h2 class="accordion-header" id="heading{{idx}}">
-              <button class="accordion-button" v-bind:class="{ collapsed: idx !== 0 }" type="button" data-bs-toggle="collapse" :data-bs-target="'#collapse' + idx" aria-expanded="true" aria-controls="collapse{{idx}}">
+              <button class="accordion-button collapsed"  type="button" data-bs-toggle="collapse" :data-bs-target="'#collapse' + idx" aria-expanded="true" aria-controls="collapse{{idx}}">
                 {{ quest.name }}
               </button>
             </h2>
-            <div :id="'collapse' + idx" class="accordion-collapse collapse" v-bind:class="{ show: idx === 0 }" :aria-labelledby="'heading' + idx" data-bs-parent="#accordionQuests">
+            <div :id="'collapse' + idx" class="accordion-collapse collapse"  :aria-labelledby="'heading' + idx" data-bs-parent="#accordionQuests">
               <div class="accordion-body">
                 <div class="row mb-2">
                   <div class="col-3">Персонаж: </div>
@@ -120,6 +120,7 @@ export default {
   .accordion-body {
     background-color: #00000059;
     color: #ffffffad;
+    overflow: scroll;
   }
   .accordion-body .col-3 {
     font-weight: bold;

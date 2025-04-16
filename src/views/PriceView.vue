@@ -122,6 +122,7 @@ export default {
   .accordion-body {
     background-color: #00000059;
     color: #ffffffad;
+    overflow: scroll;
   }
   .accordion-body .col-3 {
     font-weight: bold;
